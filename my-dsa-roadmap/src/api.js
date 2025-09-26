@@ -190,15 +190,26 @@
 
 import axios from 'axios';
 
+
 // 🔹 Use env variable instead of hardcoding
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+// // Create an axios instance with base configuration
+// const api = axios.create({
+//   baseURL: API_URL,
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
+// 🔹 Use env variable for backend URL
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Create an axios instance with base configuration
 const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+baseURL: API_URL,
+headers: {
+'Content-Type': 'application/json',
+},
 });
 
 // Add a request interceptor to automatically add the token
