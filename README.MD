@@ -1,4 +1,4 @@
-#  DSA Mastery Project   
+# DSA Mastery Project   
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/satyam0777/DSA-mastery-project?style=social)  
 ![GitHub forks](https://img.shields.io/github/forks/satyam0777/DSA-mastery-project?style=social)  
@@ -13,14 +13,14 @@
 
 - A **visual mindmap view** (tree-style structure of topics)  
 - **Concept notes with time complexities**  
-- **15+ curated practice problems per topic** (inspired by Striver’s A2Z sheet)  
+- **15+ curated practice problems per topic** (inspired by Striver's A2Z sheet)  
 - A **progress tracking system** with backend integration  
 
 This project aims to make DSA prep **structured, visual, and trackable**  
 
 ---
 
-##  Features  
+## ✨ Features  
 
 ### 1. Mindmap View   
 - Displays **parent-child hierarchy** of concepts.  
@@ -29,7 +29,7 @@ This project aims to make DSA prep **structured, visual, and trackable**
 
 ### 2. Problem Sets   
 - Each concept has **15+ curated problems**.  
-- Inspired by **Striver’s A2Z DSA Sheet**.  
+- Inspired by **Striver's A2Z DSA Sheet**.  
 - Problems categorized as:  
   - Easy  
   - Medium   
@@ -55,7 +55,7 @@ This project aims to make DSA prep **structured, visual, and trackable**
 
 ---
 
-##  Tech Stack  
+## 🛠️ Tech Stack  
 
 ### Frontend  
 - **React.js** (SPA architecture)  
@@ -76,8 +76,7 @@ This project aims to make DSA prep **structured, visual, and trackable**
 
 ---
 
-##  Architecture  
-
+## 🏗️ Architecture  
 ```mermaid
 flowchart TD
     User[Frontend - React] -->|API Calls| Backend[Node.js + Express]
@@ -85,26 +84,24 @@ flowchart TD
     DB --> Backend
     Backend --> User
 
+---
 ## 📸 Screenshots  
 
-### Landing page
+### Landing Page
 ![Landing Page](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/landingpage.png)
 
-###  Mindmap View  
-![Mindmap View](./screenshort/mindmap.png)  
+### Mindmap View  
+![Mindmap View](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/mindmap.png)  
 
-###  Mindmap-detail
-![Mindmap-detail](./screenshort/mindmap-detail.png)  
+### Mindmap Detail
+![Mindmap Detail](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/mindmap-detail.png)  
 
-
-###  Problem Page  
-![Problem Page](./screenshort/problem-concept.png)  
+### Problem Page  
+![Problem Page](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/problem-concept.png)  
 
 ### Progress Report
-![Progress](./screenshort/progress.png)
+![Progress Report](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/progress.png)
 
-
-### clone
-
-`git clone https://github.com/satyam0777/DSA-mastery-project.git
-cd DSA-mastery-project`
+---
+git clone https://github.com/satyam0777/DSA-mastery-project.git
+   cd DSA-mastery-project
