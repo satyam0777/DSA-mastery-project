@@ -105,5 +105,6 @@ flowchart TD
 
 
 ### clone
-```git clone https://github.com/satyam0777/DSA-mastery-project.git
-cd DSA-mastery-project```
+
+`git clone https://github.com/satyam0777/DSA-mastery-project.git
+cd DSA-mastery-project`
