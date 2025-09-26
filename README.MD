@@ -84,7 +84,7 @@ flowchart TD
     DB --> Backend
     Backend --> User
 
----
+
 ## 📸 Screenshots  
 
 ### Landing Page
@@ -101,7 +101,7 @@ flowchart TD
 
 ### Progress Report
 ![Progress Report](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/progress.png)
-
+```
 ---
 git clone https://github.com/satyam0777/DSA-mastery-project.git
    cd DSA-mastery-project
