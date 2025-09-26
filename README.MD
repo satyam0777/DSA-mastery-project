@@ -99,7 +99,8 @@ flowchart TD
 ## 📸 Screenshots  
 
 ### Landing Page
-![Landing Page](./screenshort/landingpage.png)
+![Landing Page](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/landingpage.png)
+
 
 ### Mindmap View  
 ![Mindmap View](./screenshort/mindmap.png)  
