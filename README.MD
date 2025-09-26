@@ -93,10 +93,13 @@ flowchart TD
     Backend --> User
 
 
+
+
+```md
 ## 📸 Screenshots  
 
 ### Landing Page
-![Landing Page](./screenshort/Landingpage.png)
+![Landing Page](./screenshort/landingpage.png)
 
 ### Mindmap View  
 ![Mindmap View](./screenshort/mindmap.png)  
@@ -105,10 +108,10 @@ flowchart TD
 ![Mindmap Detail](./screenshort/mindmap-detail.png)  
 
 ### Problem Page  
-![Problem Page](./screenshort/problem.png)  
+![Problem Page](./screenshort/problem-concept.png)  
 
 ### Progress Report
-![Progress Report](./screenshort/Progress.png)
+![Progress Report](./screenshort/progress.png)
 ```
 ---
 git clone https://github.com/satyam0777/DSA-mastery-project.git
