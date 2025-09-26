@@ -4,7 +4,7 @@ import React from 'react';
 import { Trophy, Star } from 'lucide-react';
 import { getNodeProgress } from '../utils/helpers';
 
-export default function ProgressView({ nodes, completedProblems, totalProgress }) {
+export default function ProgressView({ nodes, problems, completedProblems, totalProgress }) {
   return (
     <div className="h-full overflow-y-auto">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -17,13 +17,14 @@ export default function ProgressView({ nodes, completedProblems, totalProgress }
             </div>
           </div>
           <div className="w-full bg-slate-200 rounded-full h-4 mb-4">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 h-4 rounded-full transition-all duration-500" style={{ width: `${totalProgress.percentage}%` }}></div>
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 h-4 rounded-full transition-all duration-500" style={{ width: `${totalProgress?.percentage ?? 0}%` }}></div>
           </div>
-          <p className="text-gray-600">{totalProgress.completed} of {totalProgress.total} problems completed</p>
+          <p className="text-gray-600">{totalProgress?.completed ?? 0} of {totalProgress?.total ?? 0} problems completed</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {nodes.filter(node => node.id !== 'root').map(node => {
-            const nodeProgress = getNodeProgress(node.id, completedProblems);
+            const nodeProblems = (Array.isArray(problems) ? problems.filter(p => p.nodeId === node.id) : []);
+            const nodeProgress = getNodeProgress(node.id, nodeProblems, completedProblems);
             const percentage = nodeProgress.total > 0 ? Math.round((nodeProgress.completed / nodeProgress.total) * 100) : 0;
             return (
               <div key={node.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
