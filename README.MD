@@ -84,6 +84,14 @@ flowchart TD
     DB --> Backend
     Backend --> User
 
+## 🏗️ Architecture  
+```mermaid
+flowchart TD
+    User[Frontend - React] -->|API Calls| Backend[Node.js + Express]
+    Backend -->|CRUD Ops| DB[MongoDB]
+    DB --> Backend
+    Backend --> User
+
 
 ## 📸 Screenshots  
 
