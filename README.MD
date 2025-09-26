@@ -96,19 +96,19 @@ flowchart TD
 ## 📸 Screenshots  
 
 ### Landing Page
-![Landing Page](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/landingpage.png)
+![Landing Page](./screenshort/Landingpage.png)
 
 ### Mindmap View  
-![Mindmap View](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/mindmap.png)  
+![Mindmap View](./screenshort/mindmap.png)  
 
 ### Mindmap Detail
-![Mindmap Detail](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/mindmap-detail.png)  
+![Mindmap Detail](./screenshort/mindmap-detail.png)  
 
 ### Problem Page  
-![Problem Page](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/problem-concept.png)  
+![Problem Page](./screenshort/problem.png)  
 
 ### Progress Report
-![Progress Report](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/progress.png)
+![Progress Report](./screenshort/Progress.png)
 ```
 ---
 git clone https://github.com/satyam0777/DSA-mastery-project.git
