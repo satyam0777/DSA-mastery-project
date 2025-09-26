@@ -1,128 +1,5 @@
-// import React, { useState } from "react";
 
-// export default function LandingPage({ onLogin }) {
-//   const [showModal, setShowModal] = useState(false);
-//   const [isSignUp, setIsSignUp] = useState(false);
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [name, setName] = useState("");
-//   const [error, setError] = useState("");
 
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     if (!email || !password || (isSignUp && !name)) {
-//       setError("Please fill all fields.");
-//       return;
-//     }
-//     setError("");
-//     setShowModal(false);
-//     if (onLogin) onLogin();
-//   }
-
-//   return (
-//     <div className="fixed inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-300 via-white to-indigo-500">
-//       <div className="w-full max-w-2xl flex flex-col items-center gap-8 p-8 rounded-3xl shadow-2xl bg-white/80 border-2 border-indigo-200 backdrop-blur-lg">
-//         <img src="/vite.svg" alt="DSA Roadmap" className="w-24 h-24 mb-2 animate-bounce drop-shadow-xl" />
-//         <h1 className="text-5xl md:text-6xl font-extrabold text-indigo-700 drop-shadow-lg text-center mb-2">
-//           DSA Mindmap Roadmap
-//         </h1>
-//         <p className="text-xl md:text-2xl text-gray-700 text-center max-w-2xl mb-4">
-//           Visualize, track, and master Data Structures & Algorithms with an interactive mindmap, curated LeetCode problems, and progress dashboard.
-//         </p>
-//         <button
-//           className="px-10 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-bold text-xl shadow-xl hover:scale-105 hover:from-indigo-700 transition-all duration-200"
-//           onClick={() => setShowModal(true)}
-//         >
-//           Get Started
-//         </button>
-//         <div className="mt-8 flex flex-col items-center gap-2">
-//           <span className="text-base text-gray-500">Created by Satyam Prajapati</span>
-//           <a
-//             href="https://github.com/satyam0777/DSA-Placement"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="text-indigo-500 hover:underline text-base"
-//           >
-//             GitHub Repo
-//           </a>
-//         </div>
-//       </div>
-
-//       {/* Modal for Sign In/Sign Up */}
-//       {showModal && (
-//         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-indigo-400/60 via-white/70 to-indigo-600/60 backdrop-blur-sm">
-//           <div className="relative bg-white rounded-3xl shadow-2xl p-10 w-full max-w-md flex flex-col items-center animate-fadeIn border-2 border-indigo-200">
-//             {/* Logo */}
-//             <img src="/vite.svg" alt="Logo" className="w-16 h-16 mb-2 drop-shadow-lg" />
-//             <h2 className="text-3xl font-extrabold text-indigo-700 mb-2 tracking-tight text-center">
-//               {isSignUp ? "Create Account" : "Sign In"}
-//             </h2>
-//             <p className="text-base text-gray-500 mb-4 text-center">Welcome to DSA Mindmap Roadmap</p>
-//             <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
-//               {isSignUp && (
-//                 <input
-//                   type="text"
-//                   placeholder="Full Name"
-//                   className="px-4 py-3 rounded-xl border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-lg bg-gray-50"
-//                   value={name}
-//                   onChange={e => setName(e.target.value)}
-//                 />
-//               )}
-//               <input
-//                 type="email"
-//                 placeholder="Email"
-//                 className="px-4 py-3 rounded-xl border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-lg bg-gray-50 text-gray-900 placeholder:text-gray-500"
-//                 value={email}
-//                 onChange={e => setEmail(e.target.value)}
-//               />
-//               <input
-//                 type="password"
-//                 placeholder="Password"
-//                 className="px-4 py-3 rounded-xl border border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-lg bg-gray-50 text-gray-900 placeholder:text-gray-500"
-//                 value={password}
-//                 onChange={e => setPassword(e.target.value)}
-//               />
-//               {error && <div className="text-red-500 text-base text-center">{error}</div>}
-//               <button
-//                 type="submit"
-//                 className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-bold text-xl shadow-xl hover:scale-105 hover:from-indigo-700 transition-all duration-200"
-//               >
-//                 {isSignUp ? "Sign Up" : "Sign In"}
-//               </button>
-//             </form>
-//             {/* Divider */}
-//             <div className="flex items-center w-full my-4">
-//               <div className="flex-grow h-px bg-indigo-200" />
-//               <span className="mx-2 text-gray-400 text-sm">or</span>
-//               <div className="flex-grow h-px bg-indigo-200" />
-//             </div>
-//             {/* Social login placeholder */}
-//             <button className="w-full py-2 rounded-xl bg-white border border-indigo-300 text-indigo-600 font-semibold shadow hover:bg-indigo-50 transition mb-2 flex items-center justify-center gap-2">
-//               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.18v2.73h5.23c-.22 1.18-1.32 3.47-5.23 3.47-3.15 0-5.72-2.61-5.72-5.83s2.57-5.83 5.72-5.83c1.8 0 3.01.77 3.7 1.43l2.52-2.45C16.2 3.9 14.36 3 12.17 3 6.98 3 2.83 7.13 2.83 12s4.15 9 9.34 9c5.39 0 8.95-3.79 8.95-9 0-.61-.07-1.21-.19-1.9z"/></svg>
-//               Continue with Google
-//             </button>
-//             <div className="mt-4 flex flex-col items-center gap-2 w-full">
-//               <button
-//                 className="text-indigo-500 hover:underline text-base"
-//                 onClick={() => setIsSignUp(!isSignUp)}
-//               >
-//                 {isSignUp ? "Already have an account? Sign In" : "New user? Create Account"}
-//               </button>
-//             </div>
-//             {/* Modern close button */}
-//             <button
-//               className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl bg-white rounded-full shadow p-1 transition"
-//               onClick={() => setShowModal(false)}
-//               title="Close"
-//             >
-//               <span className="sr-only">Close</span>✕
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
 import React, { useState, useEffect } from "react";
 import { login, register } from './api';
 
@@ -796,3 +673,10 @@ export default function LandingPage({ onLogin }) {
     </div>
   );
 }
+
+
+
+
+
+ 
+
