@@ -4,7 +4,26 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  completedProblems: { type: Object, default: {} }
-}, { timestamps: true });
+  completedProblems: {
+    type: Map,
+    of: Boolean,
+    default: new Map(),
+    validate: {
+      validator: function(map) {
+        if (!(map instanceof Map)) return false;
+        // Check that all keys are strings and values are booleans
+        for (const [key, value] of map) {
+          if (typeof key !== 'string' || typeof value !== 'boolean') {
+            return false;
+          }
+        }
+        return true;
+      },
+      message: 'Invalid completedProblems map'
+    }
+  },
+});
 
-export default mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+export default User;

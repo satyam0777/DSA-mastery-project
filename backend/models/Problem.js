@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 const problemSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String },
+  name: { type: String, required: true },
+  title: { type: String },
   difficulty: { type: String, enum: ['Easy', 'Medium', 'Hard'], default: 'Medium' },
+  description: { type: String },
   link: { type: String },
-  pattern: { type: String },
-  node: { type: mongoose.Schema.Types.ObjectId, ref: 'MindmapNode' },
+  nodeId: { type: String, required: true }
 }, { timestamps: true });
 
 export default mongoose.model('Problem', problemSchema);
