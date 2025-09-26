@@ -1,43 +1,36 @@
-import { getLeetCodeProblems } from '../data/problemData';
+export const adjustBrightness = (hex, percent) => {
+  const [r, g, b] = hex.match(/\w\w/g).map(c => parseInt(c, 16));
+  const p = percent / 100;
+  const newR = Math.round(Math.min(255, Math.max(0, r * (1 + p))));
+  const newG = Math.round(Math.min(255, Math.max(0, g * (1 + p))));
+  const newB = Math.round(Math.min(255, Math.max(0, b * (1 + p))));
+  return `#${[newR, newG, newB].map(c => c.toString(16).padStart(2, '0')).join('')}`;
+};
 
 
-
-export function getNodeProgress(nodeId, completedProblems) {
-  const problems = getLeetCodeProblems(nodeId);
-  const completed = problems.filter((p) => completedProblems[p.name]).length;
-  return { total: problems.length, completed };
+// convert DB/any key to a normalized UI-friendly key
+function normalizeKey(name = "") {
+  if (!name) return name;
+  // If starts with number + ". ", keep it
+  if (/^\d+\.\s/.test(name)) return name;
+  // If starts with number + "_ ", convert
+  if (/^\d+_ /.test(name)) return name.replace(/_ /, ". ");
+  return name;
 }
 
-export function adjustBrightness(hex, percent) {
-  hex = hex.replace('#', '');
-  const num = parseInt(hex, 16);
-  const amt = Math.round(2.55 * percent);
-  const R = Math.max(0, Math.min(255, (num >> 16) + amt));
-  const G = Math.max(0, Math.min(255, (num >> 8 & 0x00FF) + amt));
-  const B = Math.max(0, Math.min(255, (num & 0x0000FF) + amt));
-  return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
+export function getNodeProgress(nodeId, nodeProblems, completedProblems = {}) {
+  if (!Array.isArray(nodeProblems) || nodeProblems.length === 0) {
+    return { total: 0, completed: 0 };
+  }
+
+  let completed = 0;
+  for (const p of nodeProblems) {
+    const key = normalizeKey(p.name);
+    if (completedProblems[key]) {
+      completed++;
+    }
+  }
+
+  return { total: nodeProblems.length, completed };
 }
 
-// export function getNodeProgress(nodeId, allProblems, completedProblems) {
-//   // Filter all problems to find only those belonging to the current node
-// //   const problemsForNode = allProblems.filter(p => p.nodeId === nodeId);
-//     const problems = getLeetCodeProblems(nodeId);
-//   // Count how many of those problems are marked as complete
-//   const completedCount = problemsForNode.filter(p => completedProblems[p.name]).length;
-  
-//   return { 
-//     total: problems.length, 
-//     completed: completedCount 
-//   };
-// }
-
-// This function adjusts the brightness of a hex color for the gradients.
-// export function adjustBrightness(hex, percent) {
-//   hex = hex.replace('#', '');
-//   const num = parseInt(hex, 16);
-//   const amt = Math.round(2.55 * percent);
-//   const R = Math.max(0, Math.min(255, (num >> 16) + amt));
-//   const G = Math.max(0, Math.min(255, (num >> 8 & 0x00FF) + amt));
-//   const B = Math.max(0, Math.min(255, (num & 0x0000FF) + amt));
-//   return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
-// }
