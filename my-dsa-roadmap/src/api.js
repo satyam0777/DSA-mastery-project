@@ -188,18 +188,17 @@
 //   }
 // }
 
-
 import axios from 'axios';
 
-// 🔹 Use deployed backend instead of localhost
-const API_URL = 'https://dsa-mastery-project.onrender.com/api';
+// 🔹 Use env variable instead of hardcoding
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 // Create an axios instance with base configuration
 const api = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 // Add a request interceptor to automatically add the token
@@ -211,9 +210,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Add a response interceptor to handle errors globally
@@ -222,7 +219,6 @@ api.interceptors.response.use(
     // Check for new token in response headers
     const newToken = response.headers['x-new-token'];
     if (newToken) {
-      // Update token in localStorage and axios headers
       setToken(newToken);
     }
     return response;
@@ -230,7 +226,6 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // If error is 401 and there's no _retry flag
     if (error.response?.status === 401 && !originalRequest._retry) {
       const errorCode = error.response.data.code;
 
@@ -238,7 +233,7 @@ api.interceptors.response.use(
         originalRequest._retry = true;
         try {
           const response = await api.post('/auth/refresh', {
-            token: getToken()
+            token: getToken(),
           });
 
           const { token } = response.data;
