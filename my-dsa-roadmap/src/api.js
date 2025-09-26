@@ -2,100 +2,190 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api';
 
+// Create an axios instance with base configuration
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+// Add a request interceptor to automatically add the token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add a response interceptor to handle errors globally
+api.interceptors.response.use(
+  (response) => {
+    // Check for new token in response headers
+    const newToken = response.headers['x-new-token'];
+    if (newToken) {
+      // Update token in localStorage and axios headers
+      setToken(newToken);
+    }
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    // If error is 401 and there's no _retry flag
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      // Check specific error code
+      const errorCode = error.response.data.code;
+
+      if (errorCode === 'TOKEN_EXPIRED') {
+        originalRequest._retry = true;
+        try {
+          // Try to reauthenticate using current token
+          const response = await api.post('/auth/refresh', {
+            token: getToken()
+          });
+          
+          // If successful, update token and retry original request
+          const { token } = response.data;
+          setToken(token);
+          return api(originalRequest);
+        } catch (refreshError) {
+          // If refresh fails, logout user
+          localStorage.removeItem('token');
+          window.location.reload();
+          return Promise.reject(refreshError);
+        }
+      } else {
+        // For other auth errors, clear token and reload
+        localStorage.removeItem('token');
+        window.location.reload();
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export function setToken(token) {
-  localStorage.setItem('token', token);
+  if (token) {
+    localStorage.setItem('token', token);
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    localStorage.removeItem('token');
+    delete api.defaults.headers.common['Authorization'];
+  }
 }
+
+
 
 export function getToken() {
   return localStorage.getItem('token');
 }
 
 export async function login(email, password) {
-  const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-  setToken(res.data.token);
-  return res.data;
+  try {
+    const res = await api.post('/auth/login', { email, password });
+    setToken(res.data.token);
+    return res.data;
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
+  }
 }
 
 export async function register(name, email, password) {
-  const res = await axios.post(`${API_URL}/auth/register`, { name, email, password });
-  return res.data;
+  try {
+    const res = await api.post('/auth/register', { name, email, password });
+    return res.data;
+  } catch (error) {
+    console.error('Registration error:', error);
+    throw error;
+  }
 }
 
 export async function fetchMindmap() {
-  const token = getToken();
-  const res = await axios.get(`${API_URL}/mindmap`, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data.mindmap;
+  try {
+    const res = await api.get('/mindmap');
+    return res.data.mindmap;
+  } catch (error) {
+    console.error('Failed to fetch mindmap:', error);
+    throw error;
+  }
 }
 
 export async function fetchPatterns() {
-  const token = getToken();
-  const res = await axios.get(`${API_URL}/pattern`, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data;
+  try {
+    const res = await api.get('/pattern');
+    return res.data;
+  } catch (error) {
+    console.error('Failed to fetch patterns:', error);
+    throw error;
+  }
 }
 
 export async function fetchProblems() {
-  const token = getToken();
-  const res = await axios.get(`${API_URL}/mindmap/problems`, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data;
+  try {
+    const res = await api.get('/mindmap/problems');
+    return res.data;
+  } catch (error) {
+    console.error('Failed to fetch problems:', error);
+    throw error;
+  }
 }
 
 export async function fetchStats() {
-  const res = await axios.get(`${API_URL}/stats`);
-  return res.data;
+  try {
+    const res = await api.get('/stats');
+    return res.data;
+  } catch (error) {
+    console.error('Failed to fetch stats:', error);
+    throw error;
+  }
 }
 
 export async function fetchUserProfile() {
-  const token = getToken();
-  const res = await axios.get(`${API_URL}/user/profile`, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data;
+  try {
+    const res = await api.get('/user/profile');
+    return res.data;
+  } catch (error) {
+    console.error('Failed to fetch user profile:', error);
+    throw error;
+  }
 }
 
 export async function updateUserProfile(data) {
-  const token = getToken();
-  const res = await axios.put(`${API_URL}/user/profile`, data, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data;
+  try {
+    const res = await api.put('/user/profile', data);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to update user profile:', error);
+    throw error;
+  }
 }
 
 export async function fetchProgress() {
-  const token = getToken();
-  const res = await axios.get(`${API_URL}/progress`, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data.completedProblems;
+  try {
+    const res = await api.get('/progress');
+    return res.data.completedProblems;
+  } catch (error) {
+    console.error('Failed to fetch progress:', error);
+    throw error;
+  }
 }
 
 export async function updateProgress(completedProblems) {
-  const token = getToken();
-  const res = await axios.put(`${API_URL}/progress`, { completedProblems }, { headers: { Authorization: `Bearer ${token}` } });
-  return res.data.completedProblems;
+  try {
+    const res = await api.put('/progress', { completedProblems });
+    return res.data.completedProblems;
+  } catch (error) {
+    console.error('Failed to update progress:', error);
+    throw error;
+  }
 }
 
-
-
-// import axios from 'axios';
-
-// // Set up a default instance of axios.
-// // Replace 'http://localhost:5001' with your actual backend URL if it's different.
-// const API = axios.create({
-//   baseURL: 'http://localhost:5001/api',
-// });
-
-// // This is a crucial function. It attaches the user's authentication token
-// // to every single request they make to the backend.
-// API.interceptors.request.use((req) => {
-//   const token = localStorage.getItem('token');
-//   if (token) {
-//     req.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return req;
-// });
-
-// // --- Authentication Calls ---
-// export const login = (formData) => API.post('/auth/login', formData);
-// export const register = (formData) => API.post('/auth/register', formData);
-
-// // --- Mindmap Data Call ---
-// export const getMindmapData = () => API.get('/mindmap/data');
-
-// // --- Progress Calls ---
-// export const getProgress = () => API.get('/progress');
-// export const updateProgress = (completedProblems) => API.post('/progress', { completedProblems });
 
