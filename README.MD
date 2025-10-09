@@ -84,22 +84,11 @@ flowchart TD
     DB --> Backend
     Backend --> User
 
-## 🏗️ Architecture  
-```mermaid
-flowchart TD
-    User[Frontend - React] -->|API Calls| Backend[Node.js + Express]
-    Backend -->|CRUD Ops| DB[MongoDB]
-    DB --> Backend
-    Backend --> User
 
-
-
-
-```md
-## 📸 Screenshots  
+ 
 
 ### Landing Page
-![Landing Page](https://raw.githubusercontent.com/satyam0777/DSA-mastery-project/main/screenshort/landingpage.png)
+![Landing Page](./screenshort/Landingpage.png)
 
 
 ### Mindmap View  
@@ -109,11 +98,11 @@ flowchart TD
 ![Mindmap Detail](./screenshort/mindmap-detail.png)  
 
 ### Problem Page  
-![Problem Page](./screenshort/problem-concept.png)  
+![Problem Page](./screenshort/problem-concept.png) 
 
 ### Progress Report
 ![Progress Report](./screenshort/progress.png)
-```
+
 ---
 git clone https://github.com/satyam0777/DSA-mastery-project.git
    cd DSA-mastery-project
