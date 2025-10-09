@@ -74,18 +74,7 @@ This project aims to make DSA prep **structured, visual, and trackable**
   - `topics` – mindmap topics & hierarchy  
   - `problems` – problems under each topic  
 
----
 
-## 🏗️ Architecture  
-```mermaid
-flowchart TD
-    User[Frontend - React] -->|API Calls| Backend[Node.js + Express]
-    Backend -->|CRUD Ops| DB[MongoDB]
-    DB --> Backend
-    Backend --> User
-
-
- 
 
 ### Landing Page
 ![Landing Page](./screenshort/Landingpage.png)
@@ -103,6 +92,6 @@ flowchart TD
 ### Progress Report
 ![Progress Report](./screenshort/progress.png)
 
----
+
 git clone https://github.com/satyam0777/DSA-mastery-project.git
    cd DSA-mastery-project
