@@ -8,7 +8,6 @@ export async function getMindmapData(req, res) {
     const nodes = await MindmapNode.find();
     const edges = await Edge.find();
 
-    // Larger default mindmap so the frontend shows a complete map even before seeding
     const defaultNodes = [
         { id: 'root', label: 'DSA Master Patterns', x: 650, y: 50, w: 320, h: 90, color: '#6366f1', examples: ['Master fundamentals first'], level: 0 },
         { id: 'arrays', label: 'Arrays & Strings', x: 100, y: 200, w: 240, h: 85, color: '#10b981', examples: ['Two pointers, sliding window'], level: 1, timeComplexity: 'O(n)', spaceComplexity: 'O(1)' },

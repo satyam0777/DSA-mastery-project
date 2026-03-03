@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export function authMiddleware(req, res, next) {
-  // In development, you can bypass auth by setting this header
+  
   if (process.env.NODE_ENV === 'development' && req.headers['x-bypass-auth'] === 'true') {
     req.user = { id: 'development' };
     return next();

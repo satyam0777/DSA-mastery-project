@@ -6,8 +6,6 @@ export async function getStats(req, res) {
     const totalUsers = await User.countDocuments();
     const totalProblems = await Problem.countDocuments();
 
-    // Defensive calculation of completed problems across users.
-    // Some environments store `completedProblems` as a Map (Mongoose Map) or as a plain object.
     const users = await User.find({}, 'completedProblems').lean();
     let completedCount = 0;
 
@@ -15,7 +13,6 @@ export async function getStats(req, res) {
       const cp = u.completedProblems;
       if (!cp) continue;
 
-      // If it's stored as an object (plain) or as a POJO after .lean()
       if (typeof cp === 'object' && !Array.isArray(cp)) {
         try {
           completedCount += Object.keys(cp).length;
