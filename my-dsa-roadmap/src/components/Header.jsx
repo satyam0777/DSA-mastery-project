@@ -1,4 +1,3 @@
-// # The top navigation bar
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';

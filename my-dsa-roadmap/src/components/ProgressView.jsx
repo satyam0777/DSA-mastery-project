@@ -1,4 +1,3 @@
-//    # The progress tracking page
 
 import React from 'react';
 import { Trophy, Star } from 'lucide-react';

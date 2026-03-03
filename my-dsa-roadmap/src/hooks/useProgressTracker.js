@@ -2,23 +2,15 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { fetchProgress, updateProgress } from "../api";
 
-/**
- * Convert DB key -> UI key
- * DB: "26_ Remove Duplicates from Sorted Array"
- * UI: "26. Remove Duplicates from Sorted Array"
- */
+
 function dbKeyToUiKey(k) {
   if (!k) return k;
-  // prefer replacing "_ " -> ". " (common DB pattern). Fallback to replacing all underscores.
+ 
   if (k.includes("_ ")) return k.replace(/_ /g, ". ");
   return k.replace(/_/g, "."); 
 }
 
-/**
- * Convert UI key -> DB key
- * UI: "26. Remove Duplicates from Sorted Array"
- * DB: "26_ Remove Duplicates from Sorted Array"
- */
+
 function uiKeyToDbKey(k) {
   if (!k) return k;
   if (k.includes(". ")) return k.replace(/\. /g, "_ ");

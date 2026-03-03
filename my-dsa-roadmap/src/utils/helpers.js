@@ -8,7 +8,7 @@ export const adjustBrightness = (hex, percent) => {
 };
 
 
-// convert DB/any key to a normalized UI-friendly key
+
 function normalizeKey(name = "") {
   if (!name) return name;
   // If starts with number + ". ", keep it
